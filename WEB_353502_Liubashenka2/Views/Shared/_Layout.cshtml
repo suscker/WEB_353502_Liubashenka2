@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/lib/bootstrap-icons/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WEB_353502_Liubashenka2.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <!-- ШАПКА -->
+    <header>
+        <div class="container">
+            <nav class="navbar bg-dark navbar-expand-md border-bottom border-body" data-bs-theme="dark">
+                <!-- меню сайта -->
+                <partial name="_MenuPartial" />
+                <!-- Информация пользователя -->
+                <partial name="_UserInfoPartial" />
+            </nav>
+        </div>
+    </header>
+
+    <!-- ОСНОВНОЕ СОДЕРЖИМОЕ -->
+    <main class="container mt-4">
+        @RenderBody()
+    </main>
+
+    <!-- ПОДВАЛ -->
+    <footer class="bg-dark py-3">
+        <div class="container">
+            <div class="d-flex justify-content-end" data-bs-theme="dark">
+
+                <!-- Иконка Facebook -->
+                <a class="nav-item nav-link" href="http://www.facebook.com">
+                    <i class="bi bi-facebook" style="font-size: 2rem; color:aqua"></i>
+                </a>
+
+                <!-- Иконка VK -->
+                <a class="nav-item nav-link" href="http://www.vk.com">
+                    <i class="bi bi-chat-dots" style="font-size: 2rem; color:aqua"></i>
+                </a>
+
+                <!-- Иконка Telegram -->
+                <a class="nav-item nav-link" href="https://t.me/">
+                    <i class="bi bi-telegram" style="font-size: 2rem; color:aqua"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- СКРИПТЫ -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

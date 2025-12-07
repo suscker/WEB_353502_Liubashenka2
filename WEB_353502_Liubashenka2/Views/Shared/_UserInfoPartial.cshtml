@@ -1,0 +1,26 @@
+﻿<!-- Информация пользователя -->
+@await Component.InvokeAsync("Cart")  
+
+<div class="dropdown ms-2">
+    <button class="btn btn-secondary dropdown-toggle"
+            type="button" id="dropdownMenuButton"
+            data-bs-toggle="dropdown"
+            aria-expanded="false">
+        User@gmail.com
+        <i class="bi bi-person-circle" style="font-size: 1.2rem;"></i>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li>
+            <span class="dropdown-item-text">
+                <i class="bi bi-person-circle" style="font-size: 2rem;"></i>
+                user@gmail.com
+            </span>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+            <form id="logoutForm" class="form-inline" asp-controller="Account" asp-action="LogOut">
+                <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            </form>
+        </li>
+    </ul>
+</div>  

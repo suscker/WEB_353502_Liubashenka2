@@ -1,0 +1,4 @@
+﻿global using WEB_353502_Liubashenka2.Domain.Entities;
+global using WEB_353502_Liubashenka2.Domain.Models;
+global using WEB_353502_Liubashenka2.Services.CategoryService;
+global using WEB_353502_Liubashenka2.Services.ProductService;
