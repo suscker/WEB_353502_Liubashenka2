@@ -6,7 +6,6 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ���������� SQLite
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("Default")));
 
@@ -31,11 +30,9 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
-// Minimal API endpoints
 var dishGroup = app.MapGroup("/api/dish").WithTags("Dish");
 var categoryGroup = app.MapGroup("/api/categories").WithTags("Categories");
 
-// Endpoint для получения списка блюд с фильтрацией и пагинацией
 dishGroup.MapGet("/{category:alpha?}",
     async (IMediator mediator, string? category, int pageNo = 1, int pageSize = 3) =>
     {
@@ -44,7 +41,6 @@ dishGroup.MapGet("/{category:alpha?}",
     })
     .WithName("GetAllDishes");
 
-// Endpoint для получения списка категорий
 categoryGroup.MapGet("/",
     async (IMediator mediator) =>
     {
@@ -53,7 +49,6 @@ categoryGroup.MapGet("/",
     })
     .WithName("GetAllCategories");
 
-// ---- ������������� ���� ----
 using (var scope = app.Services.CreateScope())
 {
     try

@@ -16,12 +16,18 @@ namespace WEB_353502_Liubashenka2.Extensions
                 throw new InvalidOperationException("UriData:ApiUri не настроен в appsettings.json");
             }
 
-            // Регистрация HttpClient для API сервисов
+            // Регистрация HttpClient для API сервисов с обработкой таймаутов
             builder.Services.AddHttpClient<IProductService, ApiProductService>(opt => 
-                opt.BaseAddress = new Uri(uriData.ApiUri + "dish/"));
+            {
+                opt.BaseAddress = new Uri(uriData.ApiUri + "dish/");
+                opt.Timeout = TimeSpan.FromSeconds(30);
+            });
             
             builder.Services.AddHttpClient<ICategoryService, ApiCategoryService>(opt => 
-                opt.BaseAddress = new Uri(uriData.ApiUri + "categories/"));
+            {
+                opt.BaseAddress = new Uri(uriData.ApiUri + "categories/");
+                opt.Timeout = TimeSpan.FromSeconds(30);
+            });
         }
     }
 }

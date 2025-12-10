@@ -121,7 +121,7 @@ namespace WEB_353502_Liubashenka2.Services.ProductService
             return Task.FromResult(ResponseData<ListModel<Dish>>.Success(listModel));
         }
 
-        // Остальные методы пока не реализуем - заглушки
+        // заглушки
         public Task<ResponseData<Dish>> GetProductByIdAsync(int id)
         {
             return Task.FromResult(ResponseData<Dish>.Error("Метод не реализован"));

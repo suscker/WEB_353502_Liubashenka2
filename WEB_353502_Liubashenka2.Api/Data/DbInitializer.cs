@@ -9,60 +9,14 @@ namespace WEB_353502_Liubashenka2.Api.Data
         {
             var baseUrl = configuration["ApiSettings:BaseUrl"];
 
-            Console.WriteLine("Ensuring database is created...");
-            
-            // Если база данных существует, но таблицы не созданы, удаляем и создаем заново
-            try
-            {
-                var canConnect = await context.Database.CanConnectAsync();
-                if (canConnect)
-                {
-                    // Пытаемся проверить существование таблиц через простой запрос
-                    try
-                    {
-                        await context.Categories.CountAsync();
-                    }
-                    catch
-                    {
-                        // Если таблицы не существуют, удаляем базу и создаем заново
-                        Console.WriteLine("Tables are missing. Recreating database...");
-                        await context.Database.EnsureDeletedAsync();
-                    }
-                }
-            }
-            catch
-            {
-                // Игнорируем ошибки при проверке
-            }
-            
-            var created = await context.Database.EnsureCreatedAsync();
-            if (created)
-            {
-                Console.WriteLine("Database was created.");
-            }
-            else
-            {
-                Console.WriteLine("Database already exists.");
-            }
-            Console.WriteLine("Seeding data...");
+            Console.WriteLine("Applying migrations...");
+            await context.Database.MigrateAsync();
+            Console.WriteLine("Migrations applied. Seeding data...");
 
-            // Очистка (только если таблицы существуют и содержат данные)
-            try
-            {
-                if (await context.Dishes.AnyAsync())
-                {
-                    context.Dishes.RemoveRange(context.Dishes);
-                }
-                if (await context.Categories.AnyAsync())
-                {
-                    context.Categories.RemoveRange(context.Categories);
-                }
-                await context.SaveChangesAsync();
-            }
-            catch
-            {
-                // Игнорируем ошибки при очистке, если таблицы не существуют
-            }
+            // Полная очистка перед повторным заполнением
+            context.Dishes.RemoveRange(context.Dishes);
+            context.Categories.RemoveRange(context.Categories);
+            await context.SaveChangesAsync();
 
             // Категории
             var categories = new List<Category>
